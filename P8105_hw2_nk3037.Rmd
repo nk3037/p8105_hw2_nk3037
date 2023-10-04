@@ -104,3 +104,17 @@ prof_trash_wheel = prof_trash_wheel %>%
   select(-glass_bottles)
 # removed column so that the number and column headings match with the other two datasets for ease of binding
 ```
+
+### Data manipulation for Gwynnda Trash Wheel dataset
+```{r}
+gwynnda_trash_wheel =
+  read_excel("./data/202309 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda Trash Wheel", range = "A2:L157")
+gwynnda_trash_wheel = janitor::clean_names(gwynnda_trash_wheel, case = "snake") %>% #convert all variable names into snake_case
+
+mutate(homes_powered = (weight_tons * (500/30)))
+# Calculated the average number of homes powered for each tonne of trash and applied the formula to all the rows of the Gwynnda Trash Wheel dataset
+
+gwynnda_trash_wheel = gwynnda_trash_wheel%>% 
+  mutate(trash_wheel_name = "Gwynnda Trash Wheel")
+# Added an additional variable trash_wheel_name to help with the final bind of the datasets
+```
