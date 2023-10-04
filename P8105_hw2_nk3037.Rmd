@@ -167,3 +167,26 @@ mci_baseline_excluded = mci_baseline %>%
 ```
 
 The `mci_baseline` dataset contains the data of `r nrow(mci_baseline)` patients. Of this, `r nrow(mci_baseline_excluded)` patients had developed MCI. The average age of the patients was `r mean(mci_baseline$current_age)` years. The dataset contained `r nrow (filter(mci_baseline, sex == "Female"))` females. Among the women, `r nrow(filter(mci_baseline, sex == "Female" & apoe4_status == "Carrier"))` were carriers. Of the females, `r nrow(filter(mci_baseline_excluded, sex == "Female"))` developed MCI.
+
+### Data manipulation of mci_amyloid data
+```{r, message = FALSE, warning = FALSE}
+mci_amyloid = 
+  read.csv("./data/data_mci/mci_amyloid.csv", skip = 1) #reading the .csv file into R
+mci_amyloid = janitor::clean_names(mci_amyloid, case = "snake") # convert all variable names into snake_case
+
+mci_amyloid = mci_amyloid %>%
+  rename(baseline_post_2hrs= time_2) %>% 
+  rename (baseline_post_4hrs= time_4) %>% 
+  rename(baseline_post_6hrs= time_6) %>% 
+  rename(baseline_post_8hrs= time_8)
+#renamed the columns to be more descriptive of the variable
+
+mci_amyloid = mci_amyloid %>% 
+  rename(id = study_id)
+#renamed the id variable so that it is consistent with mci_baseline
+
+columns_to_convert <- c("baseline", "baseline_post_2hrs", "baseline_post_4hrs", "baseline_post_6hrs", "baseline_post_8hrs")
+
+mci_amyloid[columns_to_convert] <- lapply(mci_amyloid[columns_to_convert], as.numeric)
+# convert the variable types into numeric
+```
