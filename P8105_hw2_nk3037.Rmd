@@ -133,3 +133,15 @@ filtered_gwynnda = merged_trash_wheel %>%
   filter(trash_wheel_name == "Gwynnda Trash Wheel" & month == "July" & year == "2021")
 # filtered the dataset to contain only Gwynnda Trash Wheel in July 2021 to calculate the sum of cigarettes collected.
 ```
+
+The `merged_trash_wheel` dataset contains `r nrow(merged_trash_wheel)` rows and `r ncol(merged_trash_wheel)` columns. 
+
+The merged dataset contains trash collection data for the years between `r range(merged_trash_wheel$year)[1]` and `r range(merged_trash_wheel$year)[2]`. 
+
+The `merged_trash_wheel`dataset captures the weight (in tons), volume and count of each individual type of waste collected by each of the 3 trash wheels by dumpster number. 
+
+The average weight of trash collected by all of the trash wheels across the full time period of the dataset is `r mean(merged_trash_wheel$weight_tons)` tons. 
+
+The total weight of trash collected by Mr. Trash Wheel is `r sum(filtered_mr_trash$weight_tons)` tons.
+
+The total number of cigarettes collected by Gwynnda Trash Wheel in July 2021 is `r sum(filtered_mr_trash$cigarette_butts)` cigarette butts.
