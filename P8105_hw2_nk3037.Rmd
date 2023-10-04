@@ -216,3 +216,13 @@ merged_mci_data = merged_mci_data %>%
 anti_merged_mci_data <- anti_join(mci_baseline_excluded, mci_amyloid, by = "id")
 # anti-merged the two datasets to find which patients are in one dataset but not the other
 ```
+
+The `merged_mci_data` dataset contains `r nrow(merged_mci_data)` rows and `r ncol(merged_mci_data)` columns. There are `r nrow(filter(merged_mci_data, apoe4_status == "Carrier"))` carriers. The `merged_mci_data` has `r nrow (filter(merged_mci_data, sex == "Female"))` females and `r nrow (filter(merged_mci_data, sex == "Male"))` males.
+
+The average age of the patients is `r mean(merged_mci_data$current_age)` years. The ages of the patients range from `r range(merged_mci_data$current_age)[1]` to `r range(merged_mci_data$current_age)[2]` years.
+
+The average years of education of the patients is `r mean(merged_mci_data$education)` years.
+
+The average age of onset of MCI for the patients is `r mean(merged_mci_data$age_at_onset)` years.
+
+There are `r nrow(anti_merged_mci_data)` patients who are in the mci_baseline dataset and not in the mci_amyloid dataset. This is because these patients have a current age that is less than the recorded age of onset of MCI, which is not possible.
