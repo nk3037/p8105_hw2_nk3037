@@ -118,3 +118,18 @@ gwynnda_trash_wheel = gwynnda_trash_wheel%>%
   mutate(trash_wheel_name = "Gwynnda Trash Wheel")
 # Added an additional variable trash_wheel_name to help with the final bind of the datasets
 ```
+
+### Merging Mr. Trash Wheel, Prof. Trash Wheel and Gwynnda Trash Wheel datasets
+```{r}
+merged_trash_wheel_part1 = rbind(mr_trash_wheel, prof_trash_wheel)
+merged_trash_wheel = rbind(merged_trash_wheel_part1, gwynnda_trash_wheel)
+# binded the three datasets on top of each other
+
+filtered_mr_trash = merged_trash_wheel %>% 
+  filter(trash_wheel_name == "Mr. Trash Wheel")
+# filtered the dataset to contain only Mr. Trash Wheel to calculate the sum of weight of trash collected.
+
+filtered_gwynnda = merged_trash_wheel %>% 
+  filter(trash_wheel_name == "Gwynnda Trash Wheel" & month == "July" & year == "2021")
+# filtered the dataset to contain only Gwynnda Trash Wheel in July 2021 to calculate the sum of cigarettes collected.
+```
