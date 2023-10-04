@@ -202,3 +202,17 @@ The average amyloid ratio 4 hours post baseline is `r mean(mci_amyloid$baseline_
 The average amyloid ratio 6 hours post baseline is `r mean(mci_amyloid$baseline_post_6hrs, na.rm = TRUE)`. 
 
 The average amyloid ratio 8 hours post baseline is `r mean(mci_amyloid$baseline_post_8hrs, na.rm = TRUE)`. 
+
+### Merge the baseline_excluded and amyloid datasets
+```{r, message=FALSE}
+merged_mci_data = inner_join(mci_baseline_excluded, mci_amyloid, by = "id")
+#Joined the two datasets by "id" variable for the patients that appear in both mci_baseline_excluded and mci_amyloid_excluded datasets
+merged_mci_data = merged_mci_data %>% 
+  select(-apoe4)
+# removed the repeating apoe4 column
+merged_mci_data = merged_mci_data %>% 
+  filter(is.na(baseline)|(age_at_onset - current_age) > 0)
+# removing the patints that do not meet the requirements
+anti_merged_mci_data <- anti_join(mci_baseline_excluded, mci_amyloid, by = "id")
+# anti-merged the two datasets to find which patients are in one dataset but not the other
+```
