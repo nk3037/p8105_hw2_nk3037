@@ -226,3 +226,9 @@ The average years of education of the patients is `r mean(merged_mci_data$educat
 The average age of onset of MCI for the patients is `r mean(merged_mci_data$age_at_onset)` years.
 
 There are `r nrow(anti_merged_mci_data)` patients who are in the mci_baseline dataset and not in the mci_amyloid dataset. This is because these patients have a current age that is less than the recorded age of onset of MCI, which is not possible.
+
+### Export the merged_mci_data to .csv
+```{r}
+write.csv(merged_mci_data, file = "p8105_hw2_nk3037_merged_mci_data.csv", row.names = FALSE)
+#exported the dataset as a csv file
+```
