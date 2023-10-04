@@ -64,3 +64,25 @@ The `pols_month_data` has data on the political party association of the preside
 The `snp_data` dataset contains data related to the S&P stock market index. It contains `r nrow(snp_data)` rows and `r ncol(snp_data)` columns.It has data for the year `r range(snp_data$year)[1]` to `r range(snp_data$year)[2]`.
 
 Lastly, the `unemployment_data` dataset contains data on the monthly unemployment rate. It has `r nrow(unemployment_data)` rows and `r ncol(unemployment_data)` columns for the years `r range(unemployment_data$year)[1]` to `r range(unemployment_data$year)[2]`.
+
+# Question 2
+### Data manipulation for Mr. Trash Wheel dataset
+```{r}
+mr_trash_wheel = 
+  read_excel("./data/202309 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N586")
+mr_trash_wheel = janitor::clean_names(mr_trash_wheel, case = "snake") %>% #convert all variable names into snake_case
+
+mutate(homes_powered = (weight_tons * (500/30)))
+# Calculated the average number of homes powered for each tonne of trash and applied the formula to all the rows of the Mr. Trash Wheel dataset
+
+mr_trash_wheel$year = as.numeric(mr_trash_wheel$year)
+# Converting the character year variable into a numeric one so that it can be binded with the year variables from the other datasets
+
+mr_trash_wheel = mr_trash_wheel%>% 
+  mutate(trash_wheel_name = "Mr. Trash Wheel")
+# Added an additional variable trash_wheel_name to help with the final bind of the datasets
+
+mr_trash_wheel = mr_trash_wheel %>% 
+  select(-sports_balls, -glass_bottles)
+# removed columns so that the number and column headings match with the other two datasets for ease of binding
+```
