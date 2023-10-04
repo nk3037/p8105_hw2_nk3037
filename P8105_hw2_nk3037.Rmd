@@ -27,3 +27,13 @@ pols_month_data =
   left_join(x = _, y = month_df) |> 
   select(year, month, everything(), -day, -prez_dem, -prez_gop)
 ```
+
+### Cleaning snp.csv
+```{r, message=FALSE}
+snp_data = 
+  read_csv("./data/fivethirtyeight_datasets/snp.csv") %>% 
+  separate(date, into = c("year", "month", "day"), convert = TRUE) %>% 
+  arrange(year, month) %>% 
+  mutate(month = month.name[month])
+```
+
