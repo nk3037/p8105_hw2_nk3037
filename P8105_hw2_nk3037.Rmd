@@ -49,3 +49,11 @@ unemployment_data =
   )
 ```
 
+### Merging pols_month_data, snp_data and unemployment_data
+```{r, message=FALSE}
+merged_data =
+  pols_month_data %>% 
+  left_join(snp_data) %>% 
+  left_join(unemployment_data)
+```
+
