@@ -37,3 +37,15 @@ snp_data =
   mutate(month = month.name[month])
 ```
 
+### Cleaning unemployment.csv
+```{r, message=FALSE}
+unemployment_data =
+  read_csv("./data/fivethirtyeight_datasets/unemployment.csv") %>% 
+  rename(year = Year) %>% 
+  pivot_longer(
+    Jan:Dec,
+    names_to = "month",
+    values_to = "unemployment"
+  )
+```
+
