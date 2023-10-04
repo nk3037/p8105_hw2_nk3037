@@ -190,3 +190,15 @@ columns_to_convert <- c("baseline", "baseline_post_2hrs", "baseline_post_4hrs", 
 mci_amyloid[columns_to_convert] <- lapply(mci_amyloid[columns_to_convert], as.numeric)
 # convert the variable types into numeric
 ```
+
+The `mci_amyloid` dataset contains the data of `r nrow(mci_amyloid)` patients and `r ncol(mci_amyloid)`columns. Of this, `r nrow(mci_amyloid)` patients had MCI at baseline. 
+
+The average baseline amyloid ratio is `r mean(mci_amyloid$baseline, na.rm = TRUE)`. 
+
+The average amyloid ratio 2 hours post baseline is `r mean(mci_amyloid$baseline_post_2hrs, na.rm = TRUE)`. 
+
+The average amyloid ratio 4 hours post baseline is `r mean(mci_amyloid$baseline_post_4hrs, na.rm = TRUE)`.
+
+The average amyloid ratio 6 hours post baseline is `r mean(mci_amyloid$baseline_post_6hrs, na.rm = TRUE)`. 
+
+The average amyloid ratio 8 hours post baseline is `r mean(mci_amyloid$baseline_post_8hrs, na.rm = TRUE)`. 
