@@ -145,3 +145,23 @@ The average weight of trash collected by all of the trash wheels across the full
 The total weight of trash collected by Mr. Trash Wheel is `r sum(filtered_mr_trash$weight_tons)` tons.
 
 The total number of cigarettes collected by Gwynnda Trash Wheel in July 2021 is `r sum(filtered_mr_trash$cigarette_butts)` cigarette butts.
+
+# Question 3
+### Data manipulation of mci_baseline data
+```{r, message = FALSE, warning=FALSE}
+mci_baseline =
+  read_csv("./data/data_mci/MCI_baseline.csv", skip = 1) #reading the .csv file into R
+mci_baseline = janitor::clean_names(mci_baseline, case = "snake") # convert all variable names into snake_case
+
+mci_baseline = mci_baseline %>% 
+  mutate(
+    sex = recode(sex, "1" = "Male", "0" = "Female"), 
+    apoe4_status = recode(apoe4, "1" = "Carrier", "0" = "Non-carrier")
+    ) #recoded the sex and apoe4_status to non-numeric variable types
+
+mci_baseline$age_at_onset = as.numeric(mci_baseline$age_at_onset) # converted the age_at_onset variable from character to numeric so that the dataset can be filtered in the next step
+
+mci_baseline_excluded = mci_baseline %>% 
+  filter((age_at_onset - current_age) > 0)
+# removing the patients that do not meet the requirements
+```
