@@ -57,3 +57,10 @@ merged_data =
   left_join(unemployment_data)
 ```
 
+The `merged_data` dataset contains `r nrow(merged_data)` rows and `r ncol(merged_data)` columns.
+
+The `pols_month_data` has data on the political party association of the president, governors and senators for a given year. The dataset contains `r nrow(pols_month_data)` rows and `r ncol(pols_month_data)` columns. It contains data from the years `r range(pols_month_data$year)[1]` to `r range(pols_month_data$year)[2]`.
+
+The `snp_data` dataset contains data related to the S&P stock market index. It contains `r nrow(snp_data)` rows and `r ncol(snp_data)` columns.It has data for the year `r range(snp_data$year)[1]` to `r range(snp_data$year)[2]`.
+
+Lastly, the `unemployment_data` dataset contains data on the monthly unemployment rate. It has `r nrow(unemployment_data)` rows and `r ncol(unemployment_data)` columns for the years `r range(unemployment_data$year)[1]` to `r range(unemployment_data$year)[2]`.
